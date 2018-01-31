@@ -1,0 +1,5 @@
+Heroku:
+ - online service that allows us to put out api there for others to use.
+ - scaling, and making it more powerful (have to pay)
+ - extremely popular way of deploying web services such as REST APIS
+ - Heroku is similar to AWS.
