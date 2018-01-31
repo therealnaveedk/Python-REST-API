@@ -35,14 +35,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'naveed'
 api = Api(app)
 
-# Flask decorator used to run this method before the the first request
-# and this will create data.db and tables in the file that we defined up
-# unless they already exist
-# SQLAlchemy does this for us, no need to manually create tables anymore
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 #if you want to change the url authentication endpoint to /login instead of
 # the default which is /auth, add the following before the creation of jwt instance.
 # app.config['JWT_AUTH_URL_RULE'] = '/login' (and change /auth to /login in postman)

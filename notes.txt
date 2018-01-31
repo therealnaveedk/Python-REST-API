@@ -150,3 +150,9 @@ itself. IT IS NOT RUNNING THE app.py file. so therefore this never runs and nor
 does app.run but uwsgi runs the app for us so issue is we are not importing db
 and hence it does not know it exists the solution is to have another file
 (we called it run.py)
+
+in run.py we also moved the decorator form app.py that creates the tables
+
+also updated uwsgi.ini with the reference module = run:app (cuz we want to
+ execute run.py and not app.py) which is the same and will have access to the db
+  variable
