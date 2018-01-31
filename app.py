@@ -106,7 +106,7 @@ if __name__=='__main__':
     # app = Flask(__name__) and running it itself. IT IS NOT RUNNING THE app.py file
     # so therefore this never runs and nor does app.run but uwsgi runs the app for us
     # so issue is we are not importing db and hence it does not know it exists
-        # the solution is to have another file (we called it run.py)
+    # the solution is to have another file (we called it run.py)
     from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)
