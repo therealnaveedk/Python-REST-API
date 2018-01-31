@@ -182,3 +182,6 @@ PostgreSQL:
    psycopg2 is a popular python library used to interact with PostgreSQL
    sqlalchemy also uses it to communicate with PostgreSQL, even though we are NOT
    using it ourselves
+
+5) then commit to git, manual deploy in heroku and u then when u test in postman
+  its there
