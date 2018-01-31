@@ -161,3 +161,24 @@ Once these changes are placed, we should get a 404 not found! that means there w
 no error, we didnt define a path for /, so now we go over to postman change the url
 to this new url: https://python-stores-rest-api.herokuapp.com/
 (the one in the error in address bar)
+
+
+PostgreSQL:
+ - we will use this in our app so that we dont lose the data when we deploy again
+   or when dyno goes to sleep
+
+1) add it to heroku as an add on, go to resources-> find more add ons
+ limitation on heroku PostgreSQL with hobby dev (free) is 10000 rows (combined between all tables)
+
+2) in heroku go to settings -> config variables -> reveal config vars
+   copy this url. this db has been added as an environment variable.
+   environment variable is something that the system/vm/heroku keeps track off
+   so that machine is always going to know the value of this environment variable
+   All we have to do is read that variable from the environment
+3) import os is app.py (gives access to os environment variable)
+   app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+
+4) in requirements.txt: add psycopg2
+   psycopg2 is a popular python library used to interact with PostgreSQL
+   sqlalchemy also uses it to communicate with PostgreSQL, even though we are NOT
+   using it ourselves

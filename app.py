@@ -1,4 +1,6 @@
 # The item and itemlist were copy and pasted in the item.py and then stuff added to it
+import os
+
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
@@ -23,10 +25,13 @@ from resources.store import Store, StoreList
 
 app = Flask(__name__)
 
-# tell SQLAlchemy where data.db is located, in this case root of project.
-# we can replace sqlite with MySQL, PostgreSQL, Oracle and SQLAlchemy will just
-# work. literally just have to change this one like from sqlite to what you want
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# we set up PostgreSQL in Heroku and now this will go to the OS and will ask it
+# for the DATABASE_URL environment variable and if we are in Heroku, then it will read
+# that environment variable and use the PostgreSQL as the app's config value
+# however we still want to be able to run the app locally for dev and testing
+# so we still want sqlite (exL run app in computer we dont have the DATABASE_URL environment variable defined)
+# so the 2nd is default value if the 1st one isnt found
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 
 # turns off Flask SQLAlchemy modification tracker
 # does NOT turn off SQLAlchemy modification tracker
