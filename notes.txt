@@ -185,3 +185,11 @@ PostgreSQL:
 
 5) then commit to git, manual deploy in heroku and u then when u test in postman
   its there
+
+Working with Git and auto deploys:
+
+   - can set auto deploys in heroku
+   - whenever a commit arrives in master, it will deploy to github
+   - so when you are working on new code, you dont want to work on the master branch
+     cuz while added resource, code might break
+  - so we create branch. ex: git branch feature/item-categories
