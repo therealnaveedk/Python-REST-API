@@ -53,3 +53,72 @@ Conclusion:
  - to adding files to git
   - ex: .DS_Store, __pyacache__/ folders (these are caches of compiled python code),
         compiled python code so *.pyc files
+
+
+Heroku again:
+ - auto deployment means that whenever you push a commit to remote branch it will automatically go to heroku.
+ - kinda risky cuz if you have bugs in your code, they will get deployed too
+ - here we used manual deploy (current branch)
+ - may fail so we have to add some stuff to make the app run in heroku
+
+ 1) we need a way to tell heroku what python version we are using and that we are
+    using python, that is in the file called runtime.txt. it has to be called that
+    and it contains python-3.6.4
+
+ 2) need a file to tell heroku how to install the libraries that we are using this app.
+    that file is called requirements.txt (Again spelling is IMPORTANT)
+
+ 3) uWSGI is used to interact with our Flask App and make it available for others
+    to go and access it (flask can do it as well but it aint as good.)
+    uWSGI gives us things like more efficient multiprocess support, restarting
+    processes if they hang up etcc. that is in requirements.txt as well
+    (dont have to install it in your computer.) however if you are using pycharm
+    and create requirements.txt in it and save it, it will tell you whether you
+    want to install uwsgi and in your computer you dont have to install uwsgi
+    (it will likely fail cuz u need a c compiler for it)
+
+4) we need to create another file called uwsgi.ini (again spelling)
+   it contains some configuration parameters for the uwsgi process to run our app
+
+   it looks like this:
+
+   //tagging it. the section
+   [uwsgi]
+
+   //these are config params.
+
+
+   // here we are telling it what port to run on, this is heroku specific
+   //it will read the port number from the heroku config
+   http-socket = :$(PORT)
+
+   //we will use the master process when we run uwsgi
+   //essentially there will be a process controlling the other processes called
+   //slave processes
+   master = true
+
+   // when a process terminates we will kill the uwsgi process just to free up the resources
+   die-on-term = true
+
+   // module we are running is the flask app.py we are running and that is inside a variable
+   // called app (the latter app below)
+   // so it will look up that variable and thats what its gonna run as a uwsgi application
+   module = app:app
+
+   //probably wont use it in heroku but might be interesting later on
+   memory-report = true
+
+5) we need a file called Procfile (again spelling.) that just contains what dyno
+   we want to use in heroku
+   There are specific types of dynos. the dyno is this file will connect to a
+   HTTP port (ex: our app runs in port 5000) this dyno here is alos going to be
+   listening on that port to receive incoming requests hence it is important that
+   it is a dyno of type web
+
+   // latter part of web is the process/application it will run
+   // runs the uwsgi process with the uwsgi.ini file and that is then going to
+   // load up the Python app and run that
+   // so when we run this process with this config file, that is going to listen
+   // in to the module in uwsgi.ini and run our app variable that contains app.py
+   //and that will start our Flask app
+   web: uwsgi uwsgi.ini
