@@ -3,3 +3,46 @@ Heroku:
  - scaling, and making it more powerful (have to pay)
  - extremely popular way of deploying web services such as REST APIS
  - Heroku is similar to AWS.
+
+ - So its a webservice that runs your code and allows others to access it
+ - give it flask apps and it will run them and gives access to other people
+ - makes them available for others to interact with
+ - allowing this (a url other people can use) is hosting
+ - heroku can host flask apps and many other things (ruby, go etc)
+
+ How does heroku work?
+  - Heroku works with dynos.
+  - A dyno is very similar to a server
+  - server: somehting you place code on, run code, and make available to others
+  - dyno does the same thing
+  - dyno is heroku's version of a server, however it is not quite a computer
+  - The dyno is a VIRTUAL MACHINE
+  - when you application, it has only control of the vm created for that dyno
+  - limitations: cant run things simultaneously
+       - ex: we want to run something simultaneously alongside our flask app
+             is a way of improving app performance, by adding a caching layer.
+             we cannot do this in heroku
+  - However we can tell heroku to run our python app and also we will have to
+    tell it to run something called uWSGI
+  - uWSGI is a way of serving your flask application
+  - Although the Flask application has a serving layer (thats how we access it
+    using postman or our webserver) it is not the best and also it is limited in
+    waht it can interact with.
+  - By running uWSGI, which is another Python library, on top, we make our flask
+    app more flexible
+  - Dyno will run Python app, the flask app (has flask-restful), flask-sqlalchemy etc),
+    and uWSGI (this library will interact with flask app in order to make it available
+    for others to use)
+  - Imagine big box, which is the Heroku App and that will be composed of a single
+    dyno (contains python and uwsgi). heroku app can have other things too, like config properties (what db to use, etc).
+    Heroku can run many other dynos at the same time. dynos can share data between each other
+    More dynos make app faster and more available (have to pay for tht)
+   - Heroku is great for security cuz it enables automatically ssl FOR US (Secure Sockets Layer)
+   - SSL allows communication between the client (you) and the server (Heroku)
+     to be encrypted. so all of your rest api users will see encrypted communciation going to server
+     so its very useful when sending sensitive information (such as passwords) so no one can snoop
+ConclusionL
+   - Heroku: a distributed hosting service (each dyno is separate from others)
+   - Each server is a dyno and it runs your applicaation
+   - free tier gives you 1 dyno but limited running hours (goes to sleep now and then)
+   - SSL gives it a good security profile
