@@ -41,8 +41,15 @@ Heroku:
    - SSL allows communication between the client (you) and the server (Heroku)
      to be encrypted. so all of your rest api users will see encrypted communciation going to server
      so its very useful when sending sensitive information (such as passwords) so no one can snoop
-ConclusionL
+
+Conclusion:
    - Heroku: a distributed hosting service (each dyno is separate from others)
    - Each server is a dyno and it runs your applicaation
    - free tier gives you 1 dyno but limited running hours (goes to sleep now and then)
    - SSL gives it a good security profile
+
+.gitignore:
+ - contents of this files are patterns which are going to be ignored when it comes
+ - to adding files to git
+  - ex: .DS_Store, __pyacache__/ folders (these are caches of compiled python code),
+        compiled python code so *.pyc files
