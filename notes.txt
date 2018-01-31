@@ -127,3 +127,26 @@ Heroku again:
 When you run app at this point, everything is good except you get an error from heroku
 when you view it cuz this is a api and cant use a browser to view it. what occurs next
 is the fix
+
+1) install heroku command line (remember to quite terminal and then restart)
+2_ heroku auth:login
+3) heroku logs --app=python-stores-rest-api
+
+we get an error, it returns 500, when it should return 404. upon further inspection
+we seee that we have NameError: name 'db' is not defined
+
+Why? Why is this not defined? i mean we have it in app.py, so why is not defined?
+
+This is cuz we have it imported in the if statement at the bottm in app.py cuz
+we want to avoid circular imports.
+
+Now when we ran python3.6 app.py, app.py was main and hence ran without any issues
+
+(the code under that if statemetn)
+this code is executed when we directly execute app.py from python command line
+python app.py and therefore this runs. however when we run this from uwsgi,
+uwsgi is loading the app variable above app = Flask(__name__) and running it
+itself. IT IS NOT RUNNING THE app.py file. so therefore this never runs and nor
+does app.run but uwsgi runs the app for us so issue is we are not importing db
+and hence it does not know it exists the solution is to have another file
+(we called it run.py)

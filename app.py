@@ -100,6 +100,13 @@ if __name__=='__main__':
     # our item models etc will import db as well, so if we import db at the top
     # and import the models at the top, when we import the model, model imports db
     # db will be in app and that creates a circular import
+    # this code is executed when we directly execute app.py from python command line
+    # python app.py and therefore this runs
+    # however when we run this from uwsgi, uwsgi is loading the app variable above
+    # app = Flask(__name__) and running it itself. IT IS NOT RUNNING THE app.py file
+    # so therefore this never runs and nor does app.run but uwsgi runs the app for us
+    # so issue is we are not importing db and hence it does not know it exists
+        # the solution is to have another file (we called it run.py)
     from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)
