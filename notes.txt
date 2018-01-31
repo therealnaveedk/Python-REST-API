@@ -122,3 +122,8 @@ Heroku again:
    // in to the module in uwsgi.ini and run our app variable that contains app.py
    //and that will start our Flask app
    web: uwsgi uwsgi.ini
+
+
+When you run app at this point, everything is good except you get an error from heroku
+when you view it cuz this is a api and cant use a browser to view it. what occurs next
+is the fix
