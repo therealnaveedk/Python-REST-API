@@ -154,5 +154,10 @@ and hence it does not know it exists the solution is to have another file
 in run.py we also moved the decorator form app.py that creates the tables
 
 also updated uwsgi.ini with the reference module = run:app (cuz we want to
- execute run.py and not app.py) which is the same and will have access to the db
-  variable
+execute run.py and not app.py) which is the same and will have access to the db
+variable
+
+Once these changes are placed, we should get a 404 not found! that means there was
+no error, we didnt define a path for /, so now we go over to postman change the url
+to this new url: https://python-stores-rest-api.herokuapp.com/
+(the one in the error in address bar)
