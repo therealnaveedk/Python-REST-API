@@ -197,7 +197,12 @@ Working with Git and auto deploys:
   - git push --set-upstream origin feature/item-categories
   (Send this to origin remote repo and create this branch there. so both local
    and remote repos have this branch)
-  - then test locally, and after you merge i
+  - then test locally, and after you merge it
   - git checkout master
   - git merge feature/item-categories
   - once merged you push it over: git push origin master
+  - once you do this, the auto deploy is triggered
+  - so it is deployed after you push master, not the feature branch
+  - once this is done you can do: git branch -d feature/item-categories
+    and this branch is deleted
+  - can create a production branch and enable auto deploys on it
