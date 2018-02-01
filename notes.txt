@@ -206,3 +206,11 @@ Working with Git and auto deploys:
   - once this is done you can do: git branch -d feature/item-categories
     and this branch is deleted
   - can create a production branch and enable auto deploys on it
+
+Heroku limitations:
+ - not the easiest before setup
+ - not the easiest for storing data locally, improving performance, you cannot
+   change many of the parameters in heroku cuz you dont own on the server on which
+   your api is running
+
+ - hence having your own server can be more helpful
