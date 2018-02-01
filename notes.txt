@@ -193,3 +193,11 @@ Working with Git and auto deploys:
    - so when you are working on new code, you dont want to work on the master branch
      cuz while added resource, code might break
   - so we create branch. ex: git branch feature/item-categories
+  - make changes
+  - git push --set-upstream origin feature/item-categories
+  (Send this to origin remote repo and create this branch there. so both local
+   and remote repos have this branch)
+  - then test locally, and after you merge i
+  - git checkout master
+  - git merge feature/item-categories
+  - once merged you push it over: git push origin master
