@@ -4,6 +4,7 @@ import os
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
+from flask_cors import CORS
 
 from security import authenticate, identity
 
@@ -24,6 +25,7 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
+CORS(app)
 
 # we set up PostgreSQL in Heroku and now this will go to the OS and will ask it
 # for the DATABASE_URL environment variable and if we are in Heroku, then it will read
